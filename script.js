@@ -145,3 +145,85 @@ checkYourChances(randomNum)
   .catch((err) => {
     console.log("err", err);
   });
+
+//   1. Sukurti localstorage info (userId);
+localStorage.setItem("user", "dfgdf51dg1dS");
+
+// 2. Atvaizduot concolėj informaciją iš localsorage;
+const localUser = localStorage.getItem("user");
+console.log(localUser);
+
+// 3. Parašyt scriptą kuris ištrina informaciją iš userId localstorage;
+localStorage.removeItem("user");
+
+// 4. Sukurt customerId cookie.
+const localCookie = (document.cookie = "name=newCookie");
+
+// 5. Atvaizduot ekrane customer cookie;
+console.log(localCookie);
+
+// 6. Sukurt product objektą su keliais properties. Objektą įdėt į loclastorage;
+const localObj = {
+  name: "Tommy",
+  job: "Painter",
+  hobbies: ["sports", "music", "books"],
+};
+
+localStorage.setItem("userObj", JSON.stringify(localObj));
+
+// 7. Objektą išsitraukt iš localstorage bei jį atvaizduot (objekto pavidalu);
+const localUserObj = JSON.parse(localStorage.getItem("userObj"));
+
+console.log(localUserObj);
+
+// 8. Sukurti formą su 2 inputais (username, password) bei buttoną;
+
+// 9. Paspaudus button reikia consolėj atspauzdinti tiek username tiek password;
+// 10. Padaryt validaciją, jei nėra nurodyta username ar password consolėj turi atsirast ne duomenis, o informacinė žinutė prašanti įvesti duomenis;
+// 11. Sėkmės atveju į ekraną išvesti žalią tekstą su sekmės žinute, neturint duomenų - raudoną tekstą su informacine žinute;
+
+const loginButton = document.getElementById("btn");
+
+const login = () => {
+  const userName = document.getElementById("userName").value;
+  const password = document.getElementById("password").value;
+  const errorElement = document.querySelector(".error");
+  const userNameInfo = document.querySelector(".username-info");
+  const passwordInfo = document.querySelector(".password-info");
+  if (userName && password && userName.length > 3) {
+    localStorage.setItem("userName", userName);
+    errorElement.textContent = "Login was successful.";
+    errorElement.style.color = "green";
+    alert("Login was successful.");
+  } else {
+    errorElement.textContent =
+      "Please ensure that all fields are filled out completely.";
+    errorElement.style.color = "brown";
+  }
+
+  if (userName) {
+    userNameInfo.textContent = "";
+    // errorElement.textContent = "";
+  } else {
+    userNameInfo.textContent = "Please enter a username.";
+    userNameInfo.style.color = "brown";
+  }
+
+  if (userName.length > 3) {
+    userNameInfo.textContent = "";
+    // errorElement.textContent = "";
+  } else {
+    userNameInfo.textContent = "Please enter more that 3 letters";
+    userNameInfo.style.color = "brown";
+  }
+
+  if (password) {
+    passwordInfo.textContent = "";
+    // errorElement.textContent = "";
+  } else {
+    passwordInfo.textContent = "Please enter a password.";
+    passwordInfo.style.color = "brown";
+  }
+};
+
+loginButton.addEventListener("click", login);
